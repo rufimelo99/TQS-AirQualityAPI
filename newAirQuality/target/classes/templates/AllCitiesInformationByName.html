@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Air Quality</title>
+
+    <!-- preciso de dar refresh da pagina -->
+    <meta http-equiv="refresh" content="5" />
+    <!--Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+      <script>
+        //TODO
+        //exactly the same functions that i have in "api.js".. it has having a error loading the funtions
+        function token() {
+            return "72efba96064c6901c4cb6d7330ec55f94b553947";
+        }
+        function postData(id, name, co, h, dew, no2, o3, p, pm10, pm25, so2, t, w, wg, r){
+            fetch('http://localhost:8084/CityInfo', {
+                method: 'POST',
+                body:JSON.stringify({"id":id,
+                    "name":name,
+                    "co":co,
+                    "h":h,
+                    "d":dew,
+                    "no2":no2,
+                    "o3":o3,
+                    "p":p,
+                    "pm10":pm10,
+                    "pm25":pm25,
+                    "so2":so2,
+                    "t":t,
+                    "w":w,
+                    "wg":wg,
+                    "r":r,
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then((res) => res.text())
+                .then((text)=>console.log("text:"+ text))
+                .catch((err)=>console.log("err:" + err))
+        }
+        function get_specific_data_from_station(station_name, uid){
+            let string = 'https://api.waqi.info/feed/@'+uid+'/?token='+token()
+            let request_specific = new XMLHttpRequest()
+            request_specific.open('GET', string, true)
+            request_specific.onload = function() {
+                let dataa_specific = JSON.parse(this.response)
+                //console.log(dataa_specific);
+                if (request_specific.status == 200 ) {
+                    let co_value;
+                    let dew_value;
+                    let h_value;
+                    let no2_value;
+                    let o3_value;
+                    let p_value;
+                    let p10_value;
+                    let p25_value;
+                    let so2_value;
+                    let t_value;
+                    let w_value;
+                    let wg_value;
+                    let r_value;
+
+
+
+                    if (dataa_specific.data.iaqi) {
+
+                        if (dataa_specific.data.iaqi.co && dataa_specific.data.iaqi.co['v']) {
+                            co_value=dataa_specific.data.iaqi.co["v"];
+                        }
+                        if (dataa_specific.data.iaqi.r && dataa_specific.data.iaqi.r['v']) {
+                            r_value=dataa_specific.data.iaqi.r["v"];
+                        }
+                        if (dataa_specific.data.iaqi.d && dataa_specific.data.iaqi.d['v']) {
+                            dew_value=dataa_specific.data.iaqi.d["v"];
+                        }
+                        if (dataa_specific.data.iaqi.h && dataa_specific.data.iaqi.h['v']) {
+                            h_value=dataa_specific.data.iaqi.h["v"];
+                        }
+                        if (dataa_specific.data.iaqi.no2 && dataa_specific.data.iaqi.no2['v']) {
+                            no2_value=dataa_specific.data.iaqi.no2["v"];
+                        }
+                        if (dataa_specific.data.iaqi.o3 && dataa_specific.data.iaqi.o3['v']) {
+                            o3_value=dataa_specific.data.iaqi.o3["v"];
+                        }
+                        if (dataa_specific.data.iaqi.p && dataa_specific.data.iaqi.p['v']) {
+                            p_value=dataa_specific.data.iaqi.p["v"];
+                        }
+                        if (dataa_specific.data.iaqi.pm10 && dataa_specific.data.iaqi.pm10['v']) {
+                            p10_value=dataa_specific.data.iaqi.pm10["v"];
+                        }
+                        if (dataa_specific.data.iaqi.pm25 && dataa_specific.data.iaqi.pm25['v']) {
+                            p25_value=dataa_specific.data.iaqi.pm25["v"];
+                        }
+                        if (dataa_specific.data.iaqi.so2 && dataa_specific.data.iaqi.so2['v']) {
+                            so2_value=dataa_specific.data.iaqi.so2["v"];
+                        }
+                        if (dataa_specific.data.iaqi.t && dataa_specific.data.iaqi.t['v']) {
+                            t_value=dataa_specific.data.iaqi.t["v"];
+                        }
+                        if (dataa_specific.data.iaqi.w && dataa_specific.data.iaqi.w['v']) {
+                            w_value=dataa_specific.data.iaqi.w["v"];
+                        }
+                        if (dataa_specific.data.iaqi.wg && dataa_specific.data.iaqi.wg['v']) {
+                            wg_value=dataa_specific.data.iaqi.wg["v"];
+                        }
+                        postData(uid, station_name, co_value, h_value, dew_value, no2_value, o3_value, p_value, p10_value, p25_value, so2_value, t_value,  w_value, wg_value, r_value)
+                    }
+
+                }else {
+                    console.log(`It's not working! -_-`);
+
+
+                }
+            }
+            request_specific.send()
+
+        }
+        function get_data_from_all_stations(keyword) {
+            let string = 'https://api.waqi.info/search/?token='+token()+'&keyword='+keyword
+            let request = new XMLHttpRequest()
+            request.open('GET', string, true)
+            request.onload = function() {
+                // Begin accessing JSON data here
+                let dataa = JSON.parse(this.response)
+                //console.log(dataa);
+
+                if (request.status == 200 ) {
+                    //console.log(request.responseText);
+                    dataa.data.forEach(ci => {
+                        //console.log(ci.station.name)
+                        //console.log(ci.uid)
+                        get_specific_data_from_station(ci.station.name, ci.uid);
+                    })
+                } else {
+                    console.log(`It's not working! -_-`);
+
+                }
+            }
+            request.send()
+        }
+
+    </script>
+
+</head>
+
+<body style="background-color: #5c4e4d">
+<!-- Black with white text -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link">AirQuality</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"></a>
+        </li>
+        <li class="nav-item" style="float: right">
+            <a class="nav-link disabled" href="#">TQS</a>
+        </li>
+    </ul>
+</nav>
+
+<div style="opacity: 0">
+    <td id="keyword" th:text="${name}"></td>
+</div>
+<script th:inline="javascript">
+    var name = [[${name}]];
+    console.log(name);
+    get_data_from_all_stations(name);
+
+</script>
+
+<div class="container" style="display:inline-block;">
+
+    <div th:if="${cityInfoRepositoryByName.empty}"  style="color: white; background-color: darkslategray">
+        <span> No Info Available (If it's the first time, it may take a few seconds to reach the server, ty) </span>
+    </div>
+    <div th:if="${!cityInfoRepositoryByName.empty}"  style="color: white;">
+
+        <h1 style="color: white">All Stations</h1>
+        <table style="color: white; background-color: darkslategray" border=1 frame=hsides rules=rows>
+            <thead>
+            <th  style="padding:0 15px 0 15px;">Name</th>
+            <th style="padding:0 15px 0 15px;">Id</th>
+            <th style="padding:0 15px 0 15px;">PM<sub>10</sub></th>
+            <th style="padding:0 15px 0 15px;">PM<sub>2.5</sub></th>
+            <th style="padding:0 15px 0 15px;">Atmostpheric Pressure</th>
+            <th style="padding:0 15px 0 15px;">Ozone</th>
+            <th style="padding:0 15px 0 15px;">Nitrogen Dioxide</th>
+            <th style="padding:0 15px 0 15px;">Sulphur Dioxide</th>
+            <th style="padding:0 15px 0 15px;">Carbon Monoxyde</th>
+            <th style="padding:0 15px 0 15px;">Temperature</th>
+            <th style="padding:0 15px 0 15px;">Wind</th>
+            <th style="padding:0 15px 0 15px;">Rain</th>
+            <th style="padding:0 15px 0 15px;">Relative Humidity</th>
+            <th style="padding:0 15px 0 15px;">Dew</th>
+            </thead>
+            <tr th:each="CityInfoObject : ${cityInfoRepositoryByName}" class="element">
+                <td th:text="${CityInfoObject.name}" style="padding:0 15px 0 15px;"></td>
+                <td class="Id" th:text="${CityInfoObject.id}" style="font-weight: bold; text-decoration: underline; padding:0 15px 0 15px;"> </td>
+                <td th:text="${CityInfoObject.pm10}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.pm25}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.p}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.o3}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.no2}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.so2}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.co}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.t}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.w}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.r}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.h}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.d}" style="padding:0 15px 0 15px;"></td>
+
+            </tr>
+        </table>
+    </div>
+
+
+
+
+</div>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom">
+    <ul class="navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link">Universidade de Aveiro</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link">2019/20</a>
+        </li>
+        <li class="nav-item" style="float: right">
+            <a class="nav-link">Rui Melo</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link">NMEC 88889</a>
+        </li>
+    </ul>
+</nav>
+</body>
+<script>
+    $(".element").click(function(){
+        var pId = $(this).find(".Id").text();
+        if ( pId ){
+            window.location = "/CityInfo/"+pId;
+        }
+
+    });
+</script>
+</html>

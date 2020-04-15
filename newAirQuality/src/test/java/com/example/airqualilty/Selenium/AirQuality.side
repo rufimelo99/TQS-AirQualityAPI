@@ -1,0 +1,143 @@
+{
+  "id": "b914f721-5d64-4c04-85bc-45e372d0d844",
+  "version": "2.0",
+  "name": "AirQuality",
+  "url": "http://localhost:8084/CityInfo/8373",
+  "tests": [{
+    "id": "1dd6db52-4732-4d73-8d9b-73423d699903",
+    "name": "SearchForCity",
+    "commands": [{
+      "id": "9889a602-8870-44bf-9a25-b358aa484def",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "95805fa6-f20b-46a2-8f83-9e397ac9a94f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1853x1053",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f673af2c-c58f-4ffd-9309-85850496ff4e",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.leaflet-layer:nth-child(2) .leaflet-tile:nth-child(1)",
+      "targets": [
+        ["css=.leaflet-layer:nth-child(2) .leaflet-tile:nth-child(1)", "css:finder"],
+        ["xpath=//img[contains(@src,'https://tiles.waqi.info/tiles/usepa-aqi/5/15/11.png?token=_72efba96064c6901c4cb6d7330ec55f94b553947_')]", "xpath:img"],
+        ["xpath=//div[@id='map']/div/div/div[2]/div[2]/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9228982b-3e4d-4f5e-b9f2-147dee69077f",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "linkText=AirQuality",
+      "targets": [
+        ["linkText=AirQuality", "linkText"],
+        ["css=.navbar:nth-child(4) .active > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'AirQuality')]", "xpath:link"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'AirQuality')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a302e03a-028d-4560-99cf-c8a3c95d39ae",
+      "comment": "",
+      "command": "click",
+      "target": "id=input-station",
+      "targets": [
+        ["id=input-station", "id"],
+        ["css=#input-station", "css:finder"],
+        ["xpath=//input[@id='input-station']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1506de59-165d-4666-8a4e-9730b5f769aa",
+      "comment": "",
+      "command": "type",
+      "target": "id=input-station",
+      "targets": [
+        ["id=input-station", "id"],
+        ["css=#input-station", "css:finder"],
+        ["xpath=//input[@id='input-station']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Porto"
+    }, {
+      "id": "74b91b9e-4954-474d-80ee-5f1a3e30177a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.container:nth-child(6)",
+      "targets": [
+        ["css=.container:nth-child(6)", "css:finder"],
+        ["xpath=//body/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "db8e44c4-f19d-411a-aae6-ce1bc7d4a84e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.container:nth-child(6)",
+      "targets": [
+        ["css=.container:nth-child(6)", "css:finder"],
+        ["xpath=//body/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f33aa55c-b90f-4a81-9316-68c3ae1a8096",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=8373",
+      "targets": [
+        ["linkText=8373", "linkText"],
+        ["css=tr:nth-child(1) a", "css:finder"],
+        ["xpath=//a[contains(text(),'8373')]", "xpath:link"],
+        ["xpath=//div[@id='result-search']/table/tr/td[4]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'CityInfo/8373')]", "xpath:href"],
+        ["xpath=//td[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'8373')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "ee62e0db-ae3a-419f-b796-a907a900e56e",
+    "name": "SearchForID",
+    "commands": [{
+      "id": "03ad523b-62df-424a-8360-de953e9ac2b1",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "linkText=AirQuality",
+      "targets": [
+        ["linkText=AirQuality", "linkText"],
+        ["css=.navbar:nth-child(3) .active > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'AirQuality')]", "xpath:link"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'AirQuality')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ba31bfe2-786f-4205-8f99-a611ad8821e5",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "e05563ff-09ef-4928-84a1-76374f15cb06",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://localhost:8084/"],
+  "plugins": []
+}

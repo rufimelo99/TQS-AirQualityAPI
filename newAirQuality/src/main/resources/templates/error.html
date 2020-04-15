@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- preciso de dar refresh da pagina -->
+    <meta http-equiv="refresh" content="5" />
+    <title>Air Quality</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body style="background-color: #5c4e4d">
+    <script>
+        function token() {
+        return "72efba96064c6901c4cb6d7330ec55f94b553947";
+    }
+        function postData(id, name, co, h, dew, no2, o3, p, pm10, pm25, so2, t, w, wg, r){
+            fetch('http://localhost:8084/CityInfo', {
+                method: 'POST',
+                body:JSON.stringify({"id":id,
+                    "name":name,
+                    "co":co,
+                    "h":h,
+                    "d":dew,
+                    "no2":no2,
+                    "o3":o3,
+                    "p":p,
+                    "pm10":pm10,
+                    "pm25":pm25,
+                    "so2":so2,
+                    "t":t,
+                    "w":w,
+                    "wg":wg,
+                    "r":r,
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then((res) => res.text())
+                .then((text)=>console.log("text:"+ text))
+                .catch((err)=>console.log("err:" + err))
+        }
+        function get_specific_data_from_station(station_name, uid){
+            let string = 'https://api.waqi.info/feed/@'+uid+'/?token='+token()
+            let request_specific = new XMLHttpRequest()
+            request_specific.open('GET', string, true)
+            request_specific.onload = function() {
+                let dataa_specific = JSON.parse(this.response)
+                console.log(dataa_specific);
+                if (request_specific.status == 200 ) {
+                    let co_value;
+                    let dew_value;
+                    let h_value;
+                    let no2_value;
+                    let o3_value;
+                    let p_value;
+                    let p10_value;
+                    let p25_value;
+                    let so2_value;
+                    let t_value;
+                    let w_value;
+                    let wg_value;
+                    let r_value;
+
+
+
+                    if (dataa_specific.data.iaqi) {
+
+                        if (dataa_specific.data.iaqi.co && dataa_specific.data.iaqi.co['v']) {
+                            co_value=dataa_specific.data.iaqi.co["v"];
+                        }
+                        if (dataa_specific.data.iaqi.r && dataa_specific.data.iaqi.r['v']) {
+                            r_value=dataa_specific.data.iaqi.r["v"];
+                        }
+                        if (dataa_specific.data.iaqi.d && dataa_specific.data.iaqi.d['v']) {
+                            dew_value=dataa_specific.data.iaqi.d["v"];
+                        }
+                        if (dataa_specific.data.iaqi.h && dataa_specific.data.iaqi.h['v']) {
+                            h_value=dataa_specific.data.iaqi.h["v"];
+                        }
+                        if (dataa_specific.data.iaqi.no2 && dataa_specific.data.iaqi.no2['v']) {
+                            no2_value=dataa_specific.data.iaqi.no2["v"];
+                        }
+                        if (dataa_specific.data.iaqi.o3 && dataa_specific.data.iaqi.o3['v']) {
+                            o3_value=dataa_specific.data.iaqi.o3["v"];
+                        }
+                        if (dataa_specific.data.iaqi.p && dataa_specific.data.iaqi.p['v']) {
+                            p_value=dataa_specific.data.iaqi.p["v"];
+                        }
+                        if (dataa_specific.data.iaqi.pm10 && dataa_specific.data.iaqi.pm10['v']) {
+                            p10_value=dataa_specific.data.iaqi.pm10["v"];
+                        }
+                        if (dataa_specific.data.iaqi.pm25 && dataa_specific.data.iaqi.pm25['v']) {
+                            p25_value=dataa_specific.data.iaqi.pm25["v"];
+                        }
+                        if (dataa_specific.data.iaqi.so2 && dataa_specific.data.iaqi.so2['v']) {
+                            so2_value=dataa_specific.data.iaqi.so2["v"];
+                        }
+                        if (dataa_specific.data.iaqi.t && dataa_specific.data.iaqi.t['v']) {
+                            t_value=dataa_specific.data.iaqi.t["v"];
+                        }
+                        if (dataa_specific.data.iaqi.w && dataa_specific.data.iaqi.w['v']) {
+                            w_value=dataa_specific.data.iaqi.w["v"];
+                        }
+                        if (dataa_specific.data.iaqi.wg && dataa_specific.data.iaqi.wg['v']) {
+                            wg_value=dataa_specific.data.iaqi.wg["v"];
+                        }
+                        postData(uid, dataa_specific.data.city.name, co_value, h_value, dew_value, no2_value, o3_value, p_value, p10_value, p25_value, so2_value, t_value,  w_value, wg_value, r_value)
+                    }
+
+                }else {
+                    console.log(`It's not working! -_-`);
+
+
+                }
+            }
+            request_specific.send()
+
+        }
+
+        var id = [[${last_id}]];
+        console.log(id)
+        get_specific_data_from_station("ok", id)
+    </script>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link">AirQuality</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"></a>
+        </li>
+        <li class="nav-item" style="float: right">
+            <a class="nav-link disabled" href="#">TQS</a>
+        </li>
+    </ul>
+</nav>
+    <div class="container" style="color: white">
+        <h1>Something went wrong! </h1>
+        <h2>Go back and try again pls</h2>
+        <h2>Sometimes it takes a while to gather all the info</h2>
+    </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link">Universidade de Aveiro</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">2019/20</a>
+            </li>
+            <li class="nav-item" style="float: right">
+                <a class="nav-link">Rui Melo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">NMEC 88889</a>
+            </li>
+        </ul>
+    </nav>
+</body>
+</html>

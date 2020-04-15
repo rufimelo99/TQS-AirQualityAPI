@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Air Quality</title>
+    <script src="api.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+
+
+<body style="background-color: #5c4e4d">
+    <!-- Black with white text -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link">AirQuality</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"></a>
+            </li>
+            <li class="nav-item" style="float: right">
+                <a class="nav-link disabled" href="#">TQS</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container" id='map' style='height:380px;' > </div>
+    <link  rel="stylesheet"  href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css"  />  
+    <script  src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>  
+
+    <script>  
+          var  OSM_URL  =  'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';  
+          var  OSM_ATTRIB  =  '&copy;  <a  href="http://openstreetmap.org/copyright">OpenStreetMap</a>  contributors';  
+          var  osmLayer  =  L.tileLayer(OSM_URL,  {attribution:  OSM_ATTRIB});  
+      
+          var  WAQI_URL    =  "https://tiles.waqi.info/tiles/usepa-aqi/{z}/{x}/{y}.png?token=_72efba96064c6901c4cb6d7330ec55f94b553947_";  
+          var  WAQI_ATTR  =  'Air  Quality  Tiles  &copy;  <a  href="http://waqi.info">waqi.info</a>';  
+          var  waqiLayer  =  L.tileLayer(WAQI_URL,  {attribution:  WAQI_ATTR});  
+
+
+        //Lisbon: 38.736946, -9.142685
+          var  map  =  L.map('map').setView([40, -5],  5);  
+          map.addLayer(osmLayer).addLayer(waqiLayer);  
+    </script>
+
+
+
+      <div class="container">
+          <h1 style="color: white">Search</h1>
+          <input id="input-station" placeholder="">
+          <br>
+          <br>
+      </div>
+  
+     
+  
+      <div class="container" id="result-search" style="min-height: 300px"></div>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link">Universidade de Aveiro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">2019/20</a>
+                </li>
+                <li class="nav-item" style="float: right">
+                    <a class="nav-link">Rui Melo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">NMEC 88889</a>
+                </li>
+            </ul>
+        </nav>
+      <script>init("#input-token","#input-station","#result-search")</script>
+
+    <script>
+        get_specific_data_from_station("8373")
+
+    </script>
+
+</body>
+</html>

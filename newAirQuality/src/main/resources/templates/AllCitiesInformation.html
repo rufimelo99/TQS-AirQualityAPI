@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Air Quality</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Table sorting system-->
+
+
+</head>
+<body style="background-color: #5c4e4d">
+<!-- Black with white text -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link">AirQuality</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"></a>
+        </li>
+        <li class="nav-item" style="float: right">
+            <a class="nav-link disabled" href="#">TQS</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container" style="display:inline-block;">
+
+    <div th:if="${cityInfoRepository.empty}"  style="color: white; background-color: darkslategray">
+        <span> No Info Available </span>
+    </div>
+    <div th:if="${!cityInfoRepository.empty}"  style="color: white;">
+        <h1 style="color: white">All Stations</h1>
+        <table id="myTable" style="color: white; background-color: darkslategray" border=1 frame=hsides rules=rows>
+            <thead>
+            <th  style="padding:0 15px 0 15px;">Name</th>
+            <th style="padding:0 15px 0 15px;">Id</th>
+            <th style="padding:0 15px 0 15px;">PM<sub>10</sub></th>
+            <th style="padding:0 15px 0 15px;">PM<sub>2.5</sub></th>
+            <th style="padding:0 15px 0 15px;">Atmostpheric Pressure</th>
+            <th style="padding:0 15px 0 15px;">Ozone</th>
+            <th style="padding:0 15px 0 15px;">Nitrogen Dioxide</th>
+            <th style="padding:0 15px 0 15px;">Sulphur Dioxide</th>
+            <th style="padding:0 15px 0 15px;">Carbon Monoxyde</th>
+            <th style="padding:0 15px 0 15px;">Temperature</th>
+            <th style="padding:0 15px 0 15px;">Wind</th>
+            <th style="padding:0 15px 0 15px;">Rain</th>
+            <th style="padding:0 15px 0 15px;">Relative Humidity</th>
+            <th style="padding:0 15px 0 15px;">Dew</th>
+            </thead>
+            <tr th:each="CityInfoObject : ${cityInfoRepository}" class="element">
+                <td th:text="${CityInfoObject.name}" style="padding:0 15px 0 15px;"></td>
+                <td class="Id" th:text="${CityInfoObject.id}" style="font-weight: bold; text-decoration: underline; padding:0 15px 0 15px;"> </td>
+                <td th:text="${CityInfoObject.pm10}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.pm25}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.p}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.o3}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.no2}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.so2}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.co}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.t}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.w}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.r}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.h}" style="padding:0 15px 0 15px;"></td>
+                <td th:text="${CityInfoObject.d}" style="padding:0 15px 0 15px;"></td>
+
+            </tr>
+        </table>
+    </div>
+
+</div>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom">
+    <ul class="navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link">Universidade de Aveiro</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link">2019/20</a>
+        </li>
+        <li class="nav-item" style="float: right">
+            <a class="nav-link">Rui Melo</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link">NMEC 88889</a>
+        </li>
+    </ul>
+</nav>
+</body>
+<script>
+    $(".element").click(function(){
+        var pId = $(this).find(".Id").text();
+        if ( pId ){
+            window.location = "/CityInfo/"+pId;
+        }
+
+    });
+</script>
+</html>
