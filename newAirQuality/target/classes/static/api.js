@@ -45,8 +45,6 @@ function search(keyword, output) {
 		var table = $("<table class='table table-dark'/>").addClass("result")
 		output.append(table)
 
-		output.append($("<div style='color: white'/>").html("Click on any of the station to see the detailled AQI"))
-
 		var stationInfo = $("<div style='color: white'/>")
 		output.append(stationInfo)
 		var j = 0;
@@ -59,7 +57,7 @@ function search(keyword, output) {
 
 			tr.on("click",function(){
 				console.log("stationInfo: "+stationInfo);
-				showStation(station,stationInfo)
+				//showStation(station,stationInfo)
 			})
 
 			/*
@@ -70,7 +68,7 @@ function search(keyword, output) {
 			table.append(tr);
 			if (i==0)
 				console.log("stationInfo: "+stationInfo);
-				showStation(station,stationInfo)
+				//showStation(station,stationInfo)
 		})
 		//console.log(scope);
 
