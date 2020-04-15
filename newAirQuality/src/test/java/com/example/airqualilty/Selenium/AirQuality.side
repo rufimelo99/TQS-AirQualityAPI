@@ -2,7 +2,7 @@
   "id": "b914f721-5d64-4c04-85bc-45e372d0d844",
   "version": "2.0",
   "name": "AirQuality",
-  "url": "http://localhost:8084/CityInfo/8373",
+  "url": "http://localhost:8084/CityInfo/-3",
   "tests": [{
     "id": "1dd6db52-4732-4d73-8d9b-73423d699903",
     "name": "SearchForCity",
@@ -129,6 +129,21 @@
       "targets": [],
       "value": ""
     }]
+  }, {
+    "id": "cf4d3839-303e-4c7b-af3e-eab960a46c82",
+    "name": "SearchForInvalidID",
+    "commands": [{
+      "id": "af1cf46d-a741-45e6-8757-eb8b0e65d7bc",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=h1",
+      "targets": [
+        ["css=h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Something went wrong!')]", "xpath:innerText"]
+      ],
+      "value": "Something went wrong!"
+    }]
   }],
   "suites": [{
     "id": "e05563ff-09ef-4928-84a1-76374f15cb06",
@@ -138,6 +153,6 @@
     "timeout": 300,
     "tests": []
   }],
-  "urls": ["http://localhost:8084/"],
+  "urls": ["http://localhost:8084/", "http://localhost:8084/CityInfo/-3"],
   "plugins": []
 }
