@@ -2,7 +2,7 @@
   "id": "b914f721-5d64-4c04-85bc-45e372d0d844",
   "version": "2.0",
   "name": "AirQuality",
-  "url": "http://localhost:8084/CityInfo/-3",
+  "url": "http://localhost:8084/CityInfo/ByName/Lisboa",
   "tests": [{
     "id": "1dd6db52-4732-4d73-8d9b-73423d699903",
     "name": "SearchForCity",
@@ -109,24 +109,25 @@
     "id": "ee62e0db-ae3a-419f-b796-a907a900e56e",
     "name": "SearchForID",
     "commands": [{
-      "id": "03ad523b-62df-424a-8360-de953e9ac2b1",
+      "id": "11f5b676-4ea9-4f63-bb05-a655e9560a3e",
       "comment": "",
-      "command": "assertElementPresent",
-      "target": "linkText=AirQuality",
+      "command": "click",
+      "target": "css=.element:nth-child(1) header span",
       "targets": [
-        ["linkText=AirQuality", "linkText"],
-        ["css=.navbar:nth-child(3) .active > .nav-link", "css:finder"],
-        ["xpath=//a[contains(text(),'AirQuality')]", "xpath:link"],
-        ["xpath=//a", "xpath:position"],
-        ["xpath=//a[contains(.,'AirQuality')]", "xpath:innerText"]
+        ["css=.element:nth-child(1) header span", "css:finder"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Entrecampos, Lisboa, Portugal')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
-      "id": "ba31bfe2-786f-4205-8f99-a611ad8821e5",
+      "id": "31bac268-bf96-4a04-9821-3431250a2a74",
       "comment": "",
       "command": "assertElementPresent",
-      "target": "",
-      "targets": [],
+      "target": "css=.element:nth-child(2) > .profile-card",
+      "targets": [
+        ["css=.element:nth-child(2) > .profile-card", "css:finder"],
+        ["xpath=//div[2]/aside", "xpath:position"]
+      ],
       "value": ""
     }]
   }, {
