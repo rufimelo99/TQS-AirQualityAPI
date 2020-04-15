@@ -19,4 +19,4 @@ It stores temporarly the information received, creating CityInfo objects. Each o
 
 ##### Info about station nº 32: localhost:8084/CityInfo/32
 
-##### Info about stations which name matches "Lisbon": localhost:8084/CityInfo/ByName/Lisboa
+##### Info about stations which name matches "Lisboa": localhost:8084/CityInfo/ByName/Lisboa
