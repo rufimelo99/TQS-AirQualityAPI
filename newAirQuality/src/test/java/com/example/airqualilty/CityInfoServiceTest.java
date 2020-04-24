@@ -26,6 +26,7 @@ public class CityInfoServiceTest {
     private CityInfoService cityInfoService;
 
 
+
     @BeforeEach
     public void setUp() {
         CityInfo london = new CityInfo("1","London");
@@ -42,17 +43,33 @@ public class CityInfoServiceTest {
         cityInfoService.add(lisboa);
         List<CityInfo> AllCityInfos = Arrays.asList(london, porto, lisboa);
 
-        /*
+
+    }
+    @Test
+    public void CityInfoBehaviour(){
+        CityInfo london = new CityInfo("1","London");
+        List<CityInfo> London = Arrays.asList(london);
+
+        CityInfo porto = new CityInfo("2","Porto");
+        List<CityInfo> Porto = Arrays.asList(porto);
+
+        CityInfo lisboa = new CityInfo("3","Lisboa");
+        List<CityInfo> Lisboa = Arrays.asList(lisboa);
+
+        List<CityInfo> AllCityInfos = Arrays.asList(london, porto, lisboa);
+
         Mockito.when(cityInfoService.getCityInfoByName(london.getName())).thenReturn(London);
         Mockito.when(cityInfoService.getCityInfoByName(porto.getName())).thenReturn(Porto);
         Mockito.when(cityInfoService.getCityInfoByName(lisboa.getName())).thenReturn(Lisboa);
         Mockito.when(cityInfoService.getCityInfoByName("WrongKeyword")).thenReturn(null);
-        Mockito.when(cityInfoService.getCityInfoById(london.getId())).thenReturn(london);
-        Mockito.when(cityInfoService.getAllCityInfos()).thenReturn(AllCityInfos);
-        Mockito.when(cityInfoService.getCityInfoById("27")).thenReturn(null);
-        */
-    }
 
+        //?
+        //assertEquals(cityInfoService.getAllCityInfos(), AllCityInfos);
+        //assertEquals(cityInfoService.getCityInfoById(london.getId()), "1");
+
+        Mockito.when(cityInfoService.getCityInfoById("27")).thenReturn(null);
+
+    }
     @Test
     public void whenkeyword_thenCitiesShouldBeFound() {
         String name = "Lisboa";

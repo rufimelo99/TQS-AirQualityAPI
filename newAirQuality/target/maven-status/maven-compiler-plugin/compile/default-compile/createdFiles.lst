@@ -1,6 +1,7 @@
 com/example/airqualilty/RController.class
 com/example/airqualilty/CityInfoService.class
 com/example/airqualilty/CityInfo.class
+com/example/airqualilty/AppStatistics.class
 com/example/airqualilty/MyErrorController.class
 com/example/airqualilty/AirQualityApplication.class
 com/example/airqualilty/GreetingController.class

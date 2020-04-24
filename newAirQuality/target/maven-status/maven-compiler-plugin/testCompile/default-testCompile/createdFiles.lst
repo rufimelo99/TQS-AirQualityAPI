@@ -1,6 +1,8 @@
 SearchForInvalidIDTest.class
+SearchForIDTest.class
+com/example/airqualilty/ControllerTest.class
+com/example/airqualilty/Selenium/SearchForCityTest.class
 com/example/airqualilty/CityInfoTest.class
 com/example/airqualilty/RControllerTest.class
-com/example/airqualilty/ControllerTest.class
+com/example/airqualilty/AppStatisticsTest.class
 com/example/airqualilty/CityInfoServiceTest.class
-com/example/airqualilty/Selenium/SearchForCityTest.class
